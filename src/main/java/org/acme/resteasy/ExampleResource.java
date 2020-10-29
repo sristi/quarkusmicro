@@ -26,7 +26,13 @@ public class ExampleResource {
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     public List<User> add(User user){
-        Long id = Long.valueOf(users.size()+1);
+        Long id = 0L;
+        if(users.size()>0) {
+            User userOfMaxId = users.stream().reduce((a, b) -> a.getId().compareTo(b.getId()) > 0 ? a : b).get();
+            //Long id = Long.valueOf(users.size()+1);
+            id = Long.valueOf(userOfMaxId == null ? 1 : userOfMaxId.getId() + 1);
+        }else
+            id = 1L;
         user.setId(id);
         /*user.setName("user"+id);
         user.setPassword("pwd"+id);
@@ -38,7 +44,7 @@ public class ExampleResource {
     @GET
     @Path("/users/{uid}")
     @Produces(MediaType.APPLICATION_JSON)
-    public Optional<User> findById(Long uid){
+    public Optional<User> findById(@PathParam("uid") long uid){
         return users.stream()
                 .filter(item->item.getId().equals(uid))
                 .findFirst();
@@ -53,8 +59,8 @@ public class ExampleResource {
 
     @DELETE @Path("/users/{userId}")
     @Produces(MediaType.APPLICATION_JSON)
-    public List<User> remove (Long userId){
-        users.removeIf(usr->usr.getId().equals(userId));
+    public List<User> remove (@PathParam("userId") long id){
+        users.removeIf(usr->usr.getId().equals(id));
         return users;
     }
 }
