@@ -48,4 +48,6 @@ public class User {
     public void setPassword(String password) {
         this.password = password;
     }
+
+    public User() {}//added to fix Json Deserialization error No default constructor found
 }
