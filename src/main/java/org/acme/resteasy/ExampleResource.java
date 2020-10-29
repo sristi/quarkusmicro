@@ -25,14 +25,14 @@ public class ExampleResource {
     @Path("/users")
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    public Response add(User user){
+    public List<User> add(User user){
         Long id = Long.valueOf(users.size()+1);
         user.setId(id);
         /*user.setName("user"+id);
         user.setPassword("pwd"+id);
         user.setUserName("u"+id);*/
         users.add(user);
-        return Response.ok(user).build();
+        return users;
     }
 
     @GET
@@ -47,14 +47,14 @@ public class ExampleResource {
     @GET
     @Path("/users")
     @Produces("application/json")
-    public Response list(){
-        return Response.ok(users).build();
+    public List<User> list(){
+        return users;
     }
 
     @DELETE @Path("/users/{userId}")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response remove (Long userId){
+    public List<User> remove (Long userId){
         users.removeIf(usr->usr.getId().equals(userId));
-        return Response.ok(users).build();
+        return users;
     }
 }
