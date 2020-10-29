@@ -2,6 +2,7 @@ package org.acme.resteasy.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import javax.json.bind.annotation.JsonbProperty;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.NotBlank;
 
@@ -11,7 +12,7 @@ public class User {
     @NotBlank(message = "name can should not be blank")
     private String name;
     @NotBlank
-    @JsonProperty("user_name")
+    @JsonbProperty("user_name")
     private String userName;
     @NotBlank
     private String password;
