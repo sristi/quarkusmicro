@@ -12,10 +12,10 @@ public class ExampleResourceTest {
     @Test
     public void testHelloEndpoint() {
         given()
-          .when().get("/resteasy/hello")
+          .when().get("/resteasy/")
           .then()
              .statusCode(200)
-             .body(is("hello"));
+             .body(is("hello from quarkus REST api..."));
     }
 
 }
