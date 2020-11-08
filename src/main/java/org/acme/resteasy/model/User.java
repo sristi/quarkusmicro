@@ -1,12 +1,14 @@
 package org.acme.resteasy.model;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-
 import javax.json.bind.annotation.JsonbProperty;
+import javax.persistence.*;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.NotBlank;
-
+@Entity
+@Table(name ="users" )
 public class User {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Max(100000)
     private Long id;
     @NotBlank(message = "name can should not be blank")

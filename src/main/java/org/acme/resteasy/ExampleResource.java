@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-@Path("/resteasy")
+//@Path("/resteasy")
 public class ExampleResource {
 
     @GET
